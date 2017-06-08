@@ -1,6 +1,11 @@
 version: '3'
+networks:
+  nw:
 services:
   elk:
+    container_name: elk
+    networks:
+       - nw
     build: ./elk
     image: willdurand/elk
     ports:
@@ -8,43 +13,14 @@ services:
        - "8200:80"
        - "5000:5000/udp"
   configserver:
+    container_name: configserver
+    networks:
+       - nw
     image: test/config-microservices
     restart: always
     ports:
       - "8888:8888"
-
-
-
 #    logging:
 #      driver: syslog
 #      options:
 #        syslog-address: udp://192.168.99.100:5000
-
-
-#       syslog-address: "tcp://192.168.99.100:5044"
-
-
-#  discovery:
-#    image: test/euricaserver
-#    ports:
-#       - "8761:8761"
-#    restart: always
-#    links:
-#       - configserver
-#  postgres:
-#    image: postgres:latest
-#    ports:
-#        - "5432:5432"
-#    restart: always
-#    environment:
-#        - POSTGRES_USER=postgres
-#        - POSTGRES_PASSWORD=admin
-#  userservice:
-#    image: test/userservice
-#    ports:
-#            - "9090:9090"
-#    restart: always
-#    links:
-#          - discovery
-#          - configserver
-#          - postgres

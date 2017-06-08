@@ -1,5 +1,8 @@
 *.class
-
+*/target/*
+target/*
+*.iml
+.idea
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -61,3 +64,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+mvnw
+*.cmd
+.mvn/wrapper/maven-wrapper.properties
