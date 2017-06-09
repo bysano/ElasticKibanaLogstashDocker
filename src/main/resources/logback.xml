@@ -5,7 +5,8 @@
     <springProperty name="appName" source="spring.application.name"/>
 
     <appender name="TCP2LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>elk:5000</destination>
+
+        <destination>logstash:5044</destination>
 
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <customFields>{"appname":"${appName}"}</customFields>

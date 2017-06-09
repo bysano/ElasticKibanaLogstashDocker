@@ -1,0 +1,36 @@
+version: '3'
+networks:
+  nw:
+services:
+#  kibana:
+#    image: kibana:latest
+#    container_name: kibana
+#    networks:
+#       - nw
+#    ports:
+#      - "5601:5601"
+#  elasticsearch:
+#    image: elasticsearch:latest
+#    container_name: elasticsearch
+#    networks:
+#      - nw
+#    ports:
+#     - "9200:9200"
+  logstash:
+    container_name: logstash
+    build: logstash
+    command: logstash -f /config/logstash.conf
+
+    networks:
+      - nw
+    ports:
+      - "5044:5044/tcp"
+      - "9600:9600"
+  configserver:
+    container_name: configserver
+    networks:
+       - nw
+    image: test/config-microservices
+    restart: always
+    ports:
+      - "8888:8888"
